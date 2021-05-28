@@ -13,6 +13,7 @@ clean:
 	rm -rf $(PDFS)
 
 %.pdf: %.tex
+	texliveonfly -a '--shell-escape' $<
 	latexmk -pdf $<
 	texqc $<
 	texsc --pws aspell.en.pws \
