@@ -1,3 +1,7 @@
+.SHELLFLAGS = -e -c
+
+.ONESHELL:
+
 TEXS := $(wildcard *.tex)
 PDFS := $(patsubst %.tex,%.pdf,$(TEXS))
 

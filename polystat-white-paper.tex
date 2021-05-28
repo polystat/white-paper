@@ -1,111 +1,54 @@
-\documentclass[12pt]{article}
-\usepackage[bindingoffset=0.25in, left=1.2in, right=1.2in, top=1.2in, bottom=1.2in]{geometry}
-\usepackage[natbib=true,style=authoryear]{biblatex}
-  \addbibresource{main.bib}
-  \addbibresource{eolang.bib}
-  \setlength\bibitemsep{0pt}
-\usepackage{url}
-\usepackage{multicol}
-\usepackage[inline]{enumitem}
-  \setlist{noitemsep}
-  \setlist{nosep}
-\usepackage[bottom,perpage,multiple]{footmisc}
-\usepackage{graphicx}
-\usepackage{bold-extra}
-\usepackage{xcolor}
-\usepackage{mdframed}
-\usepackage{charter}
-\usepackage{microtype}
-\usepackage{xfp}
-\usepackage[colorlinks,allcolors=blue!40!black,bookmarks=false,hypertexnames=true]{hyperref}
-\usepackage{setspace}
-  \setstretch{1.2}
-  \newcommand{\setrelativestretch}[1]{%
-    \begingroup\edef\x{\endgroup
-      \noexpand\setstretch{\fpeval{(#1)*(\baselinestretch)}}%
-    }\x
-  }
-\usepackage{everypage}
-  \AddEverypageHook{
-    \begin{textblock}{0.5}[0,0](0,0)
-      \tikz \node[fill=myred,minimum width=0.5\TPHorizModule,minimum height=16\TPVertModule] {};
-    \end{textblock}
-    \begin{textblock}{0.125}[0,0](0.5,0)
-      \tikz \node[fill=myblack,inner sep=0, minimum width=0.125\TPHorizModule,minimum height=16\TPVertModule] {};
-    \end{textblock}
-  }
-\usepackage{tikz}
-\usepackage{xcolor}
-  \definecolor{firebrick}{HTML}{B22222}
-  \definecolor{myred}{HTML}{CF0A2C}
-  \definecolor{myblack}{HTML}{232527}
-\usepackage[absolute]{textpos}\TPGrid{16}{16}
-\usepackage{minted}
-  \setminted{fontsize=\small}
-  \setminted{breaklines}
-  \usemintedstyle{bw}
-  \BeforeBeginEnvironment{minted}{%
-    \vspace{6pt}\minipage{\linewidth}%
-    \setrelativestretch{0.85}%
-    \begin{mdframed}[topline=false,rightline=false,bottomline=false,linecolor=gray,linewidth=2pt]}
-  \AfterEndEnvironment{minted}{\end{mdframed}\endminipage\vspace{6pt}}
-\makeatletter
-\makeatother
-
-\date{\small\today}
-\author{Yegor Bugayenko}
-\title{{\scshape Polystat}: New Object Calculus\\to Improve Static Program Analysis}
-
-\newcommand{\code}[1]{\texttt{#1}}
-\newcommand{\nospell}[1]{#1}
+\documentclass[nosecurity,nobrand]{huawei}
+\renewcommand*\theauthor{Yegor Bugayenko}
+\renewcommand*\thetitle{{\scshape Polystat}: New Object Calculus\\to Improve Static Program Analysis}
+\addbibresource{main.bib}
+\addbibresource{eolang.bib}
 
 \newcounter{sector}[section]
 \renewcommand\thesector{\thesection.\arabic{sector}}
 \newcommand{\sector}[1]{\refstepcounter{sector}\vspace{6pt}\textbf{\textsc{\thesector $\;$ #1}}\quad}
 
-\usepackage{tikz}
-  \usetikzlibrary{positioning}
-  \usetikzlibrary{shapes}
-  \usetikzlibrary{shapes.multipart}
-  \usetikzlibrary{arrows}
-  \usetikzlibrary{arrows.meta}
-  \usetikzlibrary{fit}
-  \tikzset{
-    every node/.append style={thick, font=\sffamily},
-    every path/.append style={thick, draw=black},
-    every edge/.append style={every node/.style={font=\sffamily\scriptsize, draw=black, fill=white}},
-    every text node part/.append style={align=center}
-  }
-  \tikzstyle{arrow} = [-{Latex[width=3mm]}]
-  \newcommand\component[4][]{
-    % #1 (optional) - Additional style for the node
-    % #2 - Tikz name
-    % #3 - Location
-    % #4 - Body
-    % for example: \component{farm}{2,2}{Farm}
-    \node [outer sep=1mm] at (#3) (#2) {
-      \tikz {
-        \node[draw=black, fill=white, thick, inner sep=24pt, #1] (r) {\large\texttt{#4}};
-        \node[anchor=north east, outer sep=2pt] at (r.north east) {
-          \tikz {
-            \draw[thick, draw=black] (0,0) rectangle +(0.5,0.5);
-            \draw[thick, draw=black, fill=white] (-0.15,0.1) rectangle +(0.3,0.1);
-            \draw[thick, draw=black, fill=white] (-0.15,0.3) rectangle +(0.3,0.1);
-          }
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes}
+\usetikzlibrary{shapes.multipart}
+\usetikzlibrary{arrows}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{fit}
+\tikzset{
+  every node/.append style={thick, font=\sffamily},
+  every path/.append style={thick, draw=black},
+  every edge/.append style={every node/.style={font=\sffamily\scriptsize, draw=black, fill=white}},
+  every text node part/.append style={align=center}
+}
+\tikzstyle{arrow} = [-{Latex[width=3mm]}]
+\newcommand\component[4][]{
+  % #1 (optional) - Additional style for the node
+  % #2 - Tikz name
+  % #3 - Location
+  % #4 - Body
+  % for example: \component{farm}{2,2}{Farm}
+  \node [outer sep=1mm] at (#3) (#2) {
+    \tikz {
+      \node[draw=black, fill=white, thick, inner sep=24pt, #1] (r) {\large\texttt{#4}};
+      \node[anchor=north east, outer sep=2pt] at (r.north east) {
+        \tikz {
+          \draw[thick, draw=black] (0,0) rectangle +(0.5,0.5);
+          \draw[thick, draw=black, fill=white] (-0.15,0.1) rectangle +(0.3,0.1);
+          \draw[thick, draw=black, fill=white] (-0.15,0.3) rectangle +(0.3,0.1);
         }
       }
-    };
-  }
+    }
+  };
+}
 
 \begin{document}
-\raggedbottom
-\setlength{\topskip}{0mm}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt}
+% \raggedbottom
+% \setlength{\topskip}{0mm}
+% \setlength{\parindent}{0pt}
+% \setlength{\parskip}{6pt}
 
 \maketitle
 
-\begin{abstract}
 The quality of software, as one of the most important factors of business success in modern economy,
 may be increased by using static program analysis.
 The majority of modern programs are written in object-oriented programming languages,
@@ -116,7 +59,6 @@ behind modern object-oriented languages is one of the key reasons.
 A development of such a calculus and using it in static analysis may
 significantly contribute to object-oriented programming as a whole and
 move static analysis to a principally new level.
-\end{abstract}
 
 \section{Background}
 
@@ -225,7 +167,7 @@ reducing the amount of logical mistakes made by programmers when maintaining at
 later date~\citep{posnett2011simpler}.
 Here is an example
 of Java maintainability bug detectable by the
-\href{https://pmd.github.io/latest/pmd_rules_ecmascript_codestyle.html#assignmentinoperand}{\code{AssignmentInOperand}}
+\href{https://pmd.github.io/latest/pmd_rules_ecmascript_codestyle.html#assignmentinoperand}{\ff{AssignmentInOperand}}
 ``check'' of PMD analyzer; the code sample is adopted
 from the book of~\citet[p.475]{sierra2005head}:
 
@@ -237,8 +179,8 @@ while ((data = reader.read()) > 0) {
 }
 \end{minted}
 
-Here, the variable \code{data} is assigned and at the same time used
-as an operand for the \code{while} statement. Such a construct
+Here, the variable \ff{data} is assigned and at the same time used
+as an operand for the \ff{while} statement. Such a construct
 may confuse programmers, especially less experienced ones; it must be avoided,
 according to the command–query separation principle suggested by~\citet{meyer1997object}.
 In order to increase
@@ -322,14 +264,14 @@ of static analysis: the code gets bigger, while its quality increases.
 It is possible to classify functional bugs as either common or object-oriented specific.
 The bug suggested above belongs to the first category and may exist in
 many languages, including those that don't have object-oriented features,
-for example C. In the example above the method \code{read()} is used to read
-the data. The method belongs to the object \code{reader}, whic most probably
-is an instance of the abstract class \code{java.io.Reader}. This class
-also has method \code{close()}, which has to be called when reading is finished:
+for example C. In the example above the method \ff{read()} is used to read
+the data. The method belongs to the object \ff{reader}, whic most probably
+is an instance of the abstract class \ff{java.io.Reader}. This class
+also has method \ff{close()}, which has to be called when reading is finished:
 it's a conventional Java agreement noticable by the presence of the
-\code{Closeable} interface in the list of parents of the class \code{Reader}.
-The code above doesn't call \code{close()}, which may lead to resource leakage
-and eventual program crash. The code may be fixed like this (\code{try/finally}
+\ff{Closeable} interface in the list of parents of the class \ff{Reader}.
+The code above doesn't call \ff{close()}, which may lead to resource leakage
+and eventual program crash. The code may be fixed like this (\ff{try/finally}
 statements are added):
 
 \begin{minted}{java}
@@ -405,12 +347,12 @@ LLVM, as well as GraalVM~\citep{wurthinger2013one},
 is a powerful instrument to enable cross-platform
 compatibility between programming languages~\citep{lattner2004llvm}.
 It usually does its job in four steps:
-\begin{enumerate*}[label={\arabic*)}]
+\begin{inparaenum}[1)]
 \item converts C++ source code to LLVM IR instructions,
 \item LLVM IR to Bitcode,
 \item Bitcode to x86 Assembly,
 \item Assembly to native binary.
-\end{enumerate*}
+\end{inparaenum}
 Analyzers work either with LLVM instructions or with the Bitcode,
 parsing them into an AST or CFG, then traversing and reasoning.
 %
@@ -584,15 +526,15 @@ not be much longer than what CSA spends to analyze a program of similar size.
 
 \sector{Verification}
 In order to verify research results it is suggested to apply the following testing procedure:
-\begin{enumerate*}[label={\arabic*)}]
+\begin{inparaenum}[1)]
 \item take a hundred projects from GitHub, which have 1000+ stars and 100+ forks, and are labeled as C++ repositories;
-\item filter our \code{.cpp} files with less than 50 and more than 500 NCSS;
+\item filter our \ff{.cpp} files with less than 50 and more than 500 NCSS;
 \item analyze them with Clang Static Analyzer (baseline);
 \item analyze them using the methods developed during the research (output);
 \item manually review defects found in the baseline and absent in the output, decreasing ``recall'';
 \item manually review in the opposite direction and decrease ``precision'';
 \item stop reviewing after 1000 files or when either recall or precision fail to satisfy the evaluation criteria.
-\end{enumerate*}
+\end{inparaenum}
 
 \section{Proposed Solution}
 
@@ -723,10 +665,11 @@ Third, the first version of our new object calculus has already been created
 and a new programming language on top it was implemented---this proof-of-concept,
 if future research is done properly, is a promising indicator of success.
 
-\pagebreak
-\AtNextBibliography{\small}
-\setstretch{1.0}
-\raggedright
-\begin{multicols}{2}\printbibliography\end{multicols}
+% \pagebreak
+% \AtNextBibliography{\small}
+% \setstretch{1.0}
+% \raggedright
+% \begin{multicols}{2}\printbibliography\end{multicols}
+\PrintBibliography
 
 \end{document}
