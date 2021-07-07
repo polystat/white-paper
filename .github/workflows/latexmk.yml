@@ -11,4 +11,4 @@ jobs:
       - uses: actions/checkout@v2
       - uses: yegor256/latexmk-action@0.1.20
         with:
-          packages: ffcode href-ul huawei fmtcount trimspaces
+          packages: ffcode href-ul huawei fmtcount trimspaces catchfile catchfile transparent textpos fvextra xstring framed environ
